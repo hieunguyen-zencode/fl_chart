@@ -127,6 +127,17 @@ class PieChartPainter extends BaseChartPainter<PieChartData> {
       _sectionPaint.color = section.color;
       _sectionPaint.style = PaintingStyle.fill;
       canvasWrapper.drawPath(sectionPath, _sectionPaint);
+
+      if (i == 1) {
+        final newCenter = center.translate(8 * math.sin(sweepRadians), 8 * math.cos(sweepRadians));
+        final path = Path()
+          ..moveTo(startLine.from.dx, startLine.from.dy)
+          ..lineTo(center.dx, center.dy)
+          ..lineTo(newCenter.dx, newCenter.dy)
+          ..close();
+        _sectionPaint.color = data.sections.first.color;
+        canvasWrapper.drawPath(path, _sectionPaint);
+      }
       tempAngle += sectionDegree;
     }
 
